@@ -24,4 +24,6 @@ public interface IUsuarioService {
     public void deleteAll();
 
     public Optional<UsuarioDTO> login(String cedula,String password);
+
+    Optional<List<UsuarioDTO>> findByDepartamentoId(String id);
 }

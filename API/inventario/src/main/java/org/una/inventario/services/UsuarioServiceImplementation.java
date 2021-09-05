@@ -71,6 +71,11 @@ class UsuarioServiceImplementation implements IUsuarioService {
     }
 
     @Override
+    public Optional<List<UsuarioDTO>> findByDepartamentoId(String id) {
+        return Optional.empty();
+    }
+
+    @Override
     @Transactional(readOnly = true)
     public Optional<UsuarioDTO> findById(Long id) {
         Optional<Usuario> usuario = usuarioRepository.findById(id);

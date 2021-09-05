@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.una.inventario.dto.DepartamentoDTO;
 import org.una.inventario.dto.UsuarioDTO;
+import org.una.inventario.services.IDepartamentoService;
 import org.una.inventario.services.IUsuarioService;
 
 import java.util.List;
@@ -74,6 +76,22 @@ public class UsuarioController {
             return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @GetMapping("/id/{id}")
+    public ResponseEntity<?> findByDepartamentoId(@PathVariable(value = "id") String id) {
+        try {
+            Optional<List<UsuarioDTO>> result = usuarioService.findByDepartamentoId(id);
+            if (result.isPresent()) {
+                return new ResponseEntity<>(result, HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+        } catch (Exception e) {
+            return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+
 
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/")

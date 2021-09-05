@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface IDepartamentoService {
+
     public Optional<List<DepartamentoDTO>> findAll();
 
     public Optional<DepartamentoDTO> findById(Long id);

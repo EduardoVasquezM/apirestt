@@ -22,12 +22,14 @@ class UsuarioServiceImplementation implements IUsuarioService {
     public Optional<List<UsuarioDTO>> findByNombreCompletoAproximateIgnoreCase(String nombreCompleto) {
         List<Usuario> usuarioList = usuarioRepository.findByNombreCompletoContainingIgnoreCase(nombreCompleto);
         List<UsuarioDTO> usuarioDTOList = MapperUtils.DtoListFromEntityList(usuarioList, UsuarioDTO.class);
+        if (usuarioList.isEmpty()) throw new NotFoundInformationException();
         return Optional.ofNullable(usuarioDTOList);
 
     }
 
     private UsuarioDTO getSavedUsuarioDTO(UsuarioDTO usuarioDTO) {
         Usuario usuario = MapperUtils.EntityFromDto(usuarioDTO, Usuario.class);
+        if (usuario.toString().isEmpty()) throw new NotFoundInformationException();
         Usuario usuarioCreated = usuarioRepository.save(usuario);
         return MapperUtils.DtoFromEntity(usuarioCreated, UsuarioDTO.class);
     }

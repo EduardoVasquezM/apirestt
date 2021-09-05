@@ -31,9 +31,10 @@ public class Usuario implements Serializable {
     @Column
     private boolean estado;
 
-   // @ManyToOne
-    //@JoinColumn(name="departamentos_id")
-    private Long departamento;
+    @ManyToOne
+    @JoinColumn(name="departamentos_id")
+    private Departamento departamento;
+
 
 
     @Column(name = "fecha_registro", updatable = false)

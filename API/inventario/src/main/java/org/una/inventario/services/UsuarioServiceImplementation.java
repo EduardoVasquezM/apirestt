@@ -8,6 +8,7 @@ import org.una.inventario.entities.Usuario;
 import org.una.inventario.exceptions.NotFoundInformationException;
 import org.una.inventario.repositories.IUsuarioRepository;
 import org.una.inventario.utils.MapperUtils;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -21,8 +22,8 @@ class UsuarioServiceImplementation implements IUsuarioService {
     @Transactional(readOnly = true)
     public Optional<List<UsuarioDTO>> findByNombreCompletoAproximateIgnoreCase(String nombreCompleto) {
         List<Usuario> usuarioList = usuarioRepository.findByNombreCompletoContainingIgnoreCase(nombreCompleto);
-        List<UsuarioDTO> usuarioDTOList = MapperUtils.DtoListFromEntityList(usuarioList, UsuarioDTO.class);
         if (usuarioList.isEmpty()) throw new NotFoundInformationException();
+        List<UsuarioDTO> usuarioDTOList = MapperUtils.DtoListFromEntityList(usuarioList, UsuarioDTO.class);
         return Optional.ofNullable(usuarioDTOList);
 
     }
@@ -39,7 +40,6 @@ class UsuarioServiceImplementation implements IUsuarioService {
     public Optional<UsuarioDTO> create(UsuarioDTO usuarioDTO) {
         return Optional.ofNullable(getSavedUsuarioDTO(usuarioDTO));
     }
-
 
     @Override
     @Transactional
@@ -100,3 +100,4 @@ class UsuarioServiceImplementation implements IUsuarioService {
     }
 
 }
+
